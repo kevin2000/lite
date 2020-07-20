@@ -30,18 +30,20 @@
         <selenium-java.version>3.14.0</selenium-java.version>
         
         <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+        <mybatis-plus-boot.version>3.3.2</mybatis-plus-boot.version>
         <commons-math3.version>3.6.1</commons-math3.version>
         <commons-csv.version>1.8</commons-csv.version>
         
         <jasperreports.version>6.11.0</jasperreports.version>
 		<maven.test.skip>true</maven.test.skip>
+		<skipTests>true</skipTests>
 	</properties>
 
 	<modules>
 		<module>lite-core</module>
 	</modules>
 	
-	<dependencyManagement>
+	<!-- <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -51,5 +53,5 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
- 	</dependencyManagement>
+ 	</dependencyManagement> -->
 </project>
