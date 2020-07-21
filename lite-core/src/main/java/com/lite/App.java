@@ -1,11 +1,11 @@
-package org.lite;
+package com.lite;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.lite.*.*.dao")
+@MapperScan("com.lite.dao")
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);

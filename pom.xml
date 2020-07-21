@@ -35,6 +35,8 @@
         <commons-csv.version>1.8</commons-csv.version>
         
         <jasperreports.version>6.11.0</jasperreports.version>
+        <!-- solve unkown error for pom, due to spring boot version is too high for eclipse -->
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<maven.test.skip>true</maven.test.skip>
 		<skipTests>true</skipTests>
 	</properties>

@@ -1,4 +1,4 @@
-package org.lite;
+package com.lite;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
