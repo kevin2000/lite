@@ -41,7 +41,7 @@ public class CodeGanerator {
 
 		// 包配置
 		PackageConfig pc = new PackageConfig();
-		pc.setParent("com.lite.core");
+		pc.setParent("com.lite.system");
 		mpg.setPackageInfo(pc);
 
 		// 自定义配置
@@ -80,7 +80,7 @@ public class CodeGanerator {
 		strategy.setRestControllerStyle(true);
 
 		// 策略配置
-		strategy.setInclude("sys_user");// 需要自动生成的表名
+		//strategy.setInclude("sys_user");// 需要自动生成的表名
 		strategy.setControllerMappingHyphenStyle(true);
 		strategy.setTablePrefix(pc.getModuleName() + "_");
 		// strategy.setSuperEntityColumns("id");
