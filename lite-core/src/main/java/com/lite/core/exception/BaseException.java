@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
-import com.lite.core.utils.spring.SpringUtils;
+import com.lite.core.utils.spring.SpringUtil;
 
 public class BaseException extends RuntimeException
 {
@@ -64,7 +64,7 @@ public class BaseException extends RuntimeException
         String message = null;
         if (!StringUtils.isEmpty(code))
         {
-        	MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
+        	MessageSource messageSource = SpringUtil.getBean(MessageSource.class);
             message = messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
         }
         if (message == null)

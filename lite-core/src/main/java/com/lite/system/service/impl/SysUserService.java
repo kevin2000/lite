@@ -1,8 +1,11 @@
 package com.lite.system.service.impl;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,10 +14,12 @@ import com.lite.core.constant.Constants;
 import com.lite.core.domain.dto.LoginUser;
 import com.lite.core.redis.RedisCache;
 import com.lite.core.utils.ResponseData;
-import com.lite.core.utils.jwt.JwtUtil;
-import com.lite.core.utils.security.Md5Utils;
+import com.lite.core.utils.Util;
+import com.lite.core.utils.auth.Md5Utils;
 import com.lite.system.entity.SysUser;
+import com.lite.system.mapper.SysRoleMenuMapper;
 import com.lite.system.mapper.SysUserMapper;
+import com.lite.system.mapper.SysUserRoleMapper;
 
 /**
  * <p>
@@ -28,10 +33,15 @@ import com.lite.system.mapper.SysUserMapper;
 public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> /* implements ISysUserService */ {
 	@Autowired
 	private RedisCache redisCache;
+	@Autowired
+	private SysUserRoleMapper userRoleMapper;
+	@Autowired
+	private SysRoleMenuMapper roleMenuMapper;
 	
+
 	public ResponseData<LoginUser> login(String username, String password) {
 		QueryWrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>();
-		queryWrapper.eq("user_name", username);
+		queryWrapper.lambda().eq(SysUser::getUserName, username);
 
 		//check user status
 		SysUser user = getOne(queryWrapper);
@@ -44,8 +54,8 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> /* imple
 			return ResponseData.getFailure("The account or password was wrong");
 		
 		// create and cache token
-		String token = JwtUtil.sign(username, password);
-		redisCache.setCacheObject(Constants.LOGIN_TOKEN_KEY + token, token, (int) JwtUtil.EXPIRE_TIME / 1000,
+		String token = Util.getGuid32();
+		redisCache.setCacheObject(Constants.LOGIN_TOKEN_KEY + token, user, 11111 / 1000,
 				TimeUnit.SECONDS);
 
 		LoginUser loginUser = new LoginUser();
@@ -65,4 +75,13 @@ public class SysUserService extends ServiceImpl<SysUserMapper, SysUser> /* imple
 	private String encryptPassword(String username, String password) {
 		return Md5Utils.hash(username + password);
 	}
+
+	public List<String> getRoles(String userId) {
+		return userRoleMapper.getRolesByUserId(userId);
+	}
+	
+	public List<String> getMenus(String userId){
+		return roleMenuMapper.getMenusByUserId(userId);
+	}
+
 }

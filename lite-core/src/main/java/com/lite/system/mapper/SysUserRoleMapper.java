@@ -1,6 +1,12 @@
 package com.lite.system.mapper;
 
 import com.lite.system.entity.SysUserRole;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -12,5 +18,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-07-30
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
-
+	@Select("select role_id from sys_user_role where user_id = #{userId}")
+	List<String> getRolesByUserId(@Param("userId") String userId);
 }

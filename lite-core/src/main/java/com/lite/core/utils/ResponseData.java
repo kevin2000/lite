@@ -1,5 +1,7 @@
 package com.lite.core.utils;
- 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * 
  * response for restful api
@@ -27,6 +29,7 @@ public class ResponseData<T> {
 		this.setData(data);
 	}
 	
+	@JsonIgnore
 	public boolean isSuccess() {
 		return ResponseCode.SUCCESS.code().equals(code);
 	}
