@@ -56,7 +56,7 @@ public class InitConfig{
 				registration = new FilterRegistrationBean<UserFilter>(new NonSSOUserFilter());
 			registration.addUrlPatterns("/*");			
 			registration.addInitParameter("excludes",
-					"/lib/**,/css/**,/js/**,/images/**,/fonts/**,/api/**,/user/signup,/error/**,/user/info,/user/userChangePwd,/user/changePwd,/user/userLogin/**,/user/login/**,/user/logout/**,/user/signup/**,/user/orgSelector/**,/favicon.ico"
+					"/lib/**,/css/**,/js/**,/images/**,/fonts/**,/api/**,/user/signup,/error/**,/user/info,/user/userChangePwd,/user/changePwd,/user/userLogin/**,/login/**,/logout/**,/user/signup/**,/user/orgSelector/**,/favicon.ico"
 					+ (StringUtils.isNotBlank(excludeUrlsForUser) ? ("," + excludeUrlsForUser) : ""));
 		} else {
 			registration = new FilterRegistrationBean<UserFilter>(new UserFilter() {				

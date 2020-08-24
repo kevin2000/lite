@@ -1,34 +1,44 @@
 package com.lite.core.auth;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.lite.core.constant.Constants;
 import com.lite.core.domain.dto.LoginUser;
 import com.lite.core.redis.RedisCache;
+import com.lite.core.utils.ResponseCode;
 import com.lite.core.utils.ResponseData;
+import com.lite.core.utils.ServletUtil;
 import com.lite.system.entity.SysUser;
 import com.lite.system.service.impl.SysUserService;
 
-@RestController
+@Controller
 public class AuthController {
 	@Autowired
 	private SysUserService userService;
 	@Autowired
 	private RedisCache redisUtil;
 
-	@RequestMapping(value = "/auth/login", method = RequestMethod.POST)
+	@GetMapping(value = "/login")
+	public String login(HttpServletRequest request, HttpServletResponse response) {
+		if (ServletUtil.isAjaxRequest(request)) {
+			return ServletUtil.renderString(response, ResponseData.getFailure(ResponseCode.USER_NOT_LOGGED_IN));
+		}
+		return "login";
+	}
+	
+	@PostMapping(value = "/login")
 	@ResponseBody
 	public ResponseData<LoginUser> login(@RequestParam("username")String username, @RequestParam("password") String password) throws Exception {
 		return userService.login(username, password);
@@ -41,7 +51,7 @@ public class AuthController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/auth/logout")
 	@ResponseBody
 	public ResponseData<String> logout(HttpServletRequest request, HttpServletResponse response) {
 		// 用户退出逻辑
@@ -66,7 +76,7 @@ public class AuthController {
 		 */
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "auth/register", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseData<LoginUser> register(@RequestBody SysUser sysUser) throws Exception {
 		return userService.register(sysUser);

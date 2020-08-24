@@ -26,6 +26,7 @@ import com.lite.core.auth.SessionUtil;
 import com.lite.core.log.Logger;
 import com.lite.core.utils.ResponseCode;
 import com.lite.core.utils.ResponseData;
+import com.lite.core.utils.ServletUtil;
 import com.lite.core.utils.Util;
 import com.lite.core.utils.spring.SpringUtil;
 import com.lite.system.entity.SysUser;
@@ -116,11 +117,6 @@ public abstract class UserFilter implements Filter {
 	public abstract void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException, Exception;
 	
-	protected boolean isAjaxRequest(HttpServletRequest request) {
-		String requestedWith = request.getHeader("X-Requested-With");
-		return requestedWith != null ? "XMLHttpRequest".equals(requestedWith) : false;
-	}
-	
 	@Override
 	public void destroy() {
 	}
@@ -129,11 +125,11 @@ public abstract class UserFilter implements Filter {
 	 * redirect to Error url and containd reason
 	 * @throws IOException 
 	 */
-	protected void redirectError(HttpServletRequest request, HttpServletResponse response, ResponseData<String> errorMsg) throws IOException{
-		if (isAjaxRequest(request)) {
-			responseForAjax(response, errorMsg);
+	protected void redirectError(HttpServletRequest request, HttpServletResponse response, ResponseData<String> msg) throws IOException{
+		if (ServletUtil.isAjaxRequest(request)) {
+			ServletUtil.renderString(response, msg);
 		} else {
-			String redirectUrl = "/error/info?error=" + errorMsg.getMsg();
+			String redirectUrl = "/error/info?error=" + msg.getMsg();
 			response.sendRedirect(redirectUrl);
 		}
 	}
@@ -146,7 +142,7 @@ public abstract class UserFilter implements Filter {
 	 * @throws IOException
 	 */
 	protected void redirectLogin(HttpServletRequest request, HttpServletResponse response, String redirectUrl) throws IOException, Exception {
-		if (isAjaxRequest(request)) {
+		if (ServletUtil.isAjaxRequest(request)) {
 			responseForAjax(response, ResponseData.getFailure(ResponseCode.USER_NOT_LOGGED_IN));
 			//throw new Exception("Login please");
 		}

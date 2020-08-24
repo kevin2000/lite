@@ -39,7 +39,7 @@ public class NonSSOUserFilter extends UserFilter {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			redirectLogin(request, response, "/user/login?backUrl=" + currUrl);
+			redirectLogin(request, response, "/login?backUrl=" + currUrl);
 		}
 	}
 

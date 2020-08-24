@@ -14,7 +14,7 @@ import com.lite.core.utils.text.Convert;
  * 
  * @author ruoyi
  */
-public class ServletUtils
+public class ServletUtil
 {
     /**
      * 获取String参数
@@ -85,14 +85,14 @@ public class ServletUtils
      * @param string 待渲染的字符串
      * @return null
      */
-    public static String renderString(HttpServletResponse response, String string)
+    public static String renderString(HttpServletResponse response, ResponseData<String> msg)
     {
         try
         {
             response.setStatus(200);
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
-            response.getWriter().print(string);
+            response.getWriter().print(Util.objToJsonStr(msg));
         }
         catch (IOException e)
         {
