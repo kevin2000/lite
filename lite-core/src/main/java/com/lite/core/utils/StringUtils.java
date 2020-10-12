@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.lite.core.utils.text.StrFormatter;
 
 /**
@@ -451,6 +454,23 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
         return sb.toString();
     }
 
+    /**
+     * 驼峰 转下划线  helloWorld -> hello_world
+     * @param camelCase
+     * @return
+     */
+	public static String camelToUnderLine(String camelCase) {
+		Pattern humpPattern = Pattern.compile("[A-Z]");
+		Matcher matcher = humpPattern.matcher(camelCase);
+		StringBuffer sb = new StringBuffer();
+		while (matcher.find()) {
+			matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+
+    
     @SuppressWarnings("unchecked")
     public static <T> T cast(Object obj)
     {

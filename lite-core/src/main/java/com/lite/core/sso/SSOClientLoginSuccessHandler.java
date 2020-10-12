@@ -12,7 +12,7 @@ import com.lite.core.auth.SessionUtil;
 import com.lite.core.config.Config;
 import com.lite.core.filter.ILoginSuccessHandler;
 import com.lite.core.utils.ResponseData;
-import com.lite.system.entity.SysUser;
+import com.lite.core.entity.SysUser;
 
 @Component
 public class SSOClientLoginSuccessHandler implements ILoginSuccessHandler{

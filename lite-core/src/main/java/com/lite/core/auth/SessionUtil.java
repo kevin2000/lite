@@ -9,7 +9,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
 
 import com.lite.core.dto.MenuDto;
-import com.lite.system.entity.SysUser;
+import com.lite.core.entity.SysUser;
 
 
 /**
@@ -56,7 +56,7 @@ public class SessionUtil {
 		try {
 			SessionUser  user = getSessionUser(getCurrentHttpReuqest());
 			if (null != user)
-				return user.getUser().getUserName();
+				return user.getUser().getUserId().toString();
 		} catch (Exception e) {
 			
 		}

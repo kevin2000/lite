@@ -3,7 +3,7 @@ package com.lite.core.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lite.system.entity.SysUser;
+import com.lite.core.entity.SysUser;
 
 public interface ILoginSuccessHandler {
 	/**

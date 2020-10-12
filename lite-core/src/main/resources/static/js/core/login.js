@@ -37,7 +37,10 @@ let mainF = (e) => {
 $.validator.setDefaults({
     submitHandler: function(form) {
     	ajaxForm($("#formLogin"), "/login" , function(result) {
-  	   });
+    		if (result.code == 0) {
+    			location.href= null != backUrl ? backUrl : ctx;
+    		}
+    	});
         return false;
     }
 	
@@ -45,6 +48,8 @@ $.validator.setDefaults({
 
 $(function(){
 	mainF();
+	console.log(backUrl);
+	console.log(ctx);
 	$("#formLogin").validate({});
 	
 });

@@ -23,18 +23,18 @@ import com.lite.core.filter.NonSSOUserFilter;
 import com.lite.core.filter.UserFilter;
 
 @Component
-public class InitConfig{
+public class InitConfig {
 
 	@Autowired
 	private Config config;
-	@Autowired 
+	@Autowired
 	private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
 	@Value("${com.eb.core.api.excludeUrls:}")
 	private String excludeUrlsForApi;
 	@Value("${com.eb.core.user.excludeUrls:}")
-	private String excludeUrlsForUser; 
-	
+	private String excludeUrlsForUser;
+
 	/*
 	 * @Bean public FilterRegistrationBean<AccessFilter> accessFilterRegistration()
 	 * { FilterRegistrationBean<AccessFilter> registration = new
@@ -44,35 +44,31 @@ public class InitConfig{
 	 * "/lib/**,/css/**,/js/**,/images/**,/fonts/**," + "/," +
 	 * "/user/signup,/favicon.ico"); return registration; }
 	 */
-	
-	@Bean
-	public FilterRegistrationBean<UserFilter> userFilterRegistration() {
-		FilterRegistrationBean<UserFilter> registration = null;
-		if (config.getAllowUserFilter()) {
-			/*
-			 * if (config.getAllowSsoFilter()) registration = new
-			 * FilterRegistrationBean<UserFilter>(new SSOUserFilter()); else
-			 */
-				registration = new FilterRegistrationBean<UserFilter>(new NonSSOUserFilter());
-			registration.addUrlPatterns("/*");			
-			registration.addInitParameter("excludes",
-					"/lib/**,/css/**,/js/**,/images/**,/fonts/**,/api/**,/user/signup,/error/**,/user/info,/user/userChangePwd,/user/changePwd,/user/userLogin/**,/login/**,/logout/**,/user/signup/**,/user/orgSelector/**,/favicon.ico"
-					+ (StringUtils.isNotBlank(excludeUrlsForUser) ? ("," + excludeUrlsForUser) : ""));
-		} else {
-			registration = new FilterRegistrationBean<UserFilter>(new UserFilter() {				
-				@Override
-				public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-						throws IOException, ServletException, Exception {
-					//do nothing		
-				}
-			});
-			registration.addUrlPatterns("/test/test");;
-		}
-		registration.setName("userFilter");
-		// registration.setOrder(1);
-		return registration;
-	}
-	
+
+	/*
+	 * @Bean public FilterRegistrationBean<UserFilter> userFilterRegistration() {
+	 * FilterRegistrationBean<UserFilter> registration = null; if
+	 * (config.getAllowUserFilter()) {
+	 * 
+	 * if (config.getAllowSsoFilter()) registration = new
+	 * FilterRegistrationBean<UserFilter>(new SSOUserFilter()); else
+	 * 
+	 * registration = new FilterRegistrationBean<UserFilter>(new
+	 * NonSSOUserFilter()); registration.addUrlPatterns("/*");
+	 * registration.addInitParameter("excludes",
+	 * "/lib/**,/css/**,/js/**,/images/**,/fonts/**,/api/**,/user/signup,/error/**,/user/info,/user/userChangePwd,/user/changePwd,/user/userLogin/**,/login/**,/logout/**,/user/signup/**,/user/orgSelector/**,/favicon.ico"
+	 * + (StringUtils.isNotBlank(excludeUrlsForUser) ? ("," + excludeUrlsForUser) :
+	 * "")); } else { registration = new FilterRegistrationBean<UserFilter>(new
+	 * UserFilter() {
+	 * 
+	 * @Override public void doFilter(HttpServletRequest request,
+	 * HttpServletResponse response, FilterChain chain) throws IOException,
+	 * ServletException, Exception { //do nothing } });
+	 * registration.addUrlPatterns("/test/test");; }
+	 * registration.setName("userFilter"); // registration.setOrder(1); return
+	 * registration; }
+	 */
+
 	/*
 	 * @Bean public FilterRegistrationBean<ApiServerFilter> apiFilterRegistration()
 	 * { FilterRegistrationBean<ApiServerFilter> registration = new
@@ -85,22 +81,24 @@ public class InitConfig{
 	 * (StringUtils.isNotBlank(excludeUrlsForApi) ? ("," + excludeUrlsForApi) :
 	 * "")); // registration.setOrder(1); return registration; }
 	 */
-	
+
 	/*
 	 * @PostConstruct void setDefaultTimeZone() {
 	 * //TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
 	 * TimeZone.setDefault(TimeZone.getTimeZone(config.getUtilDefaultTimeZoneId()));
 	 * //"Asia/Kolkata" }
 	 */
-	
+
 	/**
 	 * trim all white place from parameters
 	 */
 	@PostConstruct
-	public void addConversionConfig(){
-		ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) requestMappingHandlerAdapter.getWebBindingInitializer();
-		if(initializer.getConversionService() != null){
-			GenericConversionService genericConversionService =(GenericConversionService) initializer.getConversionService();
+	public void addConversionConfig() {
+		ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) requestMappingHandlerAdapter
+				.getWebBindingInitializer();
+		if (initializer.getConversionService() != null) {
+			GenericConversionService genericConversionService = (GenericConversionService) initializer
+					.getConversionService();
 			genericConversionService.addConverter(new ParamTrimConverter());
 		}
 	}

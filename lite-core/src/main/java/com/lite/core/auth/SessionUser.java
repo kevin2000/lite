@@ -2,7 +2,7 @@ package com.lite.core.auth;
 
 import java.io.Serializable;
 
-import com.lite.system.entity.SysUser;
+import com.lite.core.entity.SysUser;
 
 /**
  * 已登录用户信息

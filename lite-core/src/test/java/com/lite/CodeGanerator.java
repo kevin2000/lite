@@ -63,13 +63,29 @@ public class CodeGanerator {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
 				// 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-				return projectPath + "/src/main/resources/mapper/" + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+				return projectPath + "/src/main/resources/mapper/sys/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
 			}
 		});
+		
+		// 调整 domain 生成目录演示
+        focList.add(new FileOutConfig("/templates/generator/Myservice.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                //输出的位置
+                return projectPath + "/src/main/java/com/lite/sys/myService/" + tableInfo.getEntityName() + "Service.java";
+            }
+        });
+		
 		cfg.setFileOutConfigList(focList);
 		mpg.setCfg(cfg);
-		mpg.setTemplate(new TemplateConfig().setXml(null));
-
+		
+		
+		TemplateConfig tc = new TemplateConfig();
+		tc.setXml(null);
+		//tc.setServiceImpl("/templates/generator/service.java.vm");
+		tc.setService(null);
+		mpg.setTemplate(tc);
+		
 		// 策略配置
 		StrategyConfig strategy = new StrategyConfig();
 		strategy.setNaming(NamingStrategy.underline_to_camel);

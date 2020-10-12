@@ -54,6 +54,10 @@ public class ResponseData<T> {
 		return new ResponseData<T>(code.code(), data, code.msg()); 
 	}
 	
+	public static <T> ResponseData<T> getFailure() {
+		return getFailure("fail");
+	}
+	
 	public static <T> ResponseData<T> getFailure(String msg) {
 		return getFailure(msg, null);
 	}

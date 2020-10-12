@@ -29,8 +29,7 @@ import com.lite.core.utils.ResponseData;
 import com.lite.core.utils.ServletUtil;
 import com.lite.core.utils.Util;
 import com.lite.core.utils.spring.SpringUtil;
-import com.lite.system.entity.SysUser;
-import com.lite.system.service.impl.SysUserService;
+import com.lite.core.entity.SysUser;
 
 /**
  * 单点登录权限系统Filter基类

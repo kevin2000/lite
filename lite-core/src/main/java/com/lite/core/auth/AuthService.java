@@ -2,7 +2,7 @@ package com.lite.core.auth;
 
 import org.springframework.stereotype.Service;
 
-import com.lite.system.entity.SysUser;
+import com.lite.core.entity.SysUser;
 
 @Service
 public class AuthService {

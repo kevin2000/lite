@@ -30,4 +30,7 @@ public class Config {
 
 	@Value("${com.eb.core.mongodb.extraUris:}")
 	private String extraUris;
+	
+	@Value("${com.lite.core.basePackage:com.lite.core}")
+	private String basePackage;
 }
