@@ -5,18 +5,10 @@ import java.util.List;
 public class PermVo {
     private String id;
     private String label;
-    private Boolean isApi;
-	private String api;
+
+    private String api;
     private List<PermVo> children;
 
-    public Boolean getIsApi() {
-		return isApi;
-	}
-
-	public void setIsApi(Boolean isApi) {
-		this.isApi = isApi;
-	}
-	
     public String getId() {
         return id;
     }

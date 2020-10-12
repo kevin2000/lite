@@ -49,12 +49,10 @@ public class PermissionUtil {
             	if (mapApiToPerm.containsKey(pre)) {
             		perm = new PermVo();
             		perm.setApi(api);
-            		perm.setIsApi(true);
             		mapApiToPerm.get(pre).getChildren().add(perm);
             	} else {
             		perm = new PermVo();
             		perm.setApi(api);
-            		perm.setIsApi(false);
             		
             	}
             	api = pre;
@@ -64,7 +62,6 @@ public class PermissionUtil {
             
             perm = new PermVo();
     		perm.setApi(api);
-    		perm.setIsApi(false);
     		root.add(perm);
             /*String[] menus = requiresPermissionsDesc.menu();
             if (menus.length != 2) {
@@ -150,7 +147,7 @@ public class PermissionUtil {
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
                 	else
-                		permission.setUrl(classUrl);
+                		continue;
                     if (null != mapping.method() && mapping.method().length > 0)
                     	permission.setMethod(mapping.method()[0].name());
                     else
@@ -169,7 +166,7 @@ public class PermissionUtil {
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
                 	else
-                		permission.setUrl(classUrl);
+                		continue;
                     permission.setMethod(RequestMethod.POST.name());
                     
                     permissions.add(permission);
@@ -185,7 +182,7 @@ public class PermissionUtil {
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
                 	else
-                		permission.setUrl(classUrl);
+                		continue;
                     permission.setMethod(RequestMethod.GET.name());
                     
                     permissions.add(permission);
@@ -201,7 +198,7 @@ public class PermissionUtil {
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
                 	else
-                		permission.setUrl(classUrl);
+                		continue;
                     permission.setMethod(RequestMethod.PUT.name());
                     
                     permissions.add(permission);
@@ -217,7 +214,7 @@ public class PermissionUtil {
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
                 	else
-                		permission.setUrl(classUrl);
+                		continue;
                     permission.setMethod(RequestMethod.DELETE.name());
                     
                     permissions.add(permission);
