@@ -25,7 +25,7 @@ public class SysMenuPermService extends ServiceImpl<SysMenuPermMapper, SysMenuPe
 		save(menuPerm);
 	}
 
-	public List<SysMenuPerm> listByPermId(String permId){
+	public List<SysMenuPerm> listByPermId(Long permId){
 		return list(new QueryWrapper<SysMenuPerm>().lambda().eq(SysMenuPerm::getPermId, permId));
 	}
 

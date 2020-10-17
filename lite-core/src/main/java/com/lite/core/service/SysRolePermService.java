@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRolePermService extends ServiceImpl<SysRolePermMapper, SysRolePerm> {
-	public List<SysRolePerm> listByPermId(String permId){
+	public List<SysRolePerm> listByPermId(Long permId){
 		return list(new QueryWrapper<SysRolePerm>().lambda().eq(SysRolePerm::getPermId, permId));
 	}
 }
