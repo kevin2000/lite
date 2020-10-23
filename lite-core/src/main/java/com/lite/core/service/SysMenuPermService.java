@@ -28,6 +28,10 @@ public class SysMenuPermService extends ServiceImpl<SysMenuPermMapper, SysMenuPe
 	public List<SysMenuPerm> listByPermId(Long permId){
 		return list(new QueryWrapper<SysMenuPerm>().lambda().eq(SysMenuPerm::getPermId, permId));
 	}
+	
+	public List<SysMenuPerm> listByMenuId(Long menuId){
+		return list(new QueryWrapper<SysMenuPerm>().lambda().eq(SysMenuPerm::getMenuId, menuId));
+	}
 
 	public void clearUnavailablePerms() {
 		

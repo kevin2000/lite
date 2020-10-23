@@ -8,6 +8,9 @@ import com.lite.core.entity.SysRoleMenu;
 import com.lite.core.entity.SysRolePerm;
 import com.lite.core.mapper.SysPermMapper;
 import com.lite.core.utils.spring.SpringUtil;
+
+import cn.hutool.core.collection.CollectionUtil;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -99,7 +102,59 @@ public class SysPermService extends ServiceImpl<SysPermMapper, SysPerm> {
 	 * @param permGroup
 	 * @param menuId
 	 */
-	public void associatePermGroupAndMenu(List<String> permGroup, String menuId) {
+	@Transactional
+	public void associatePermGroupAndMenu(Long menuId, List<Long> permIds) {
+		if (CollectionUtils.isNotEmpty(permIds)) {
+			List<SysMenuPerm> oldMenuPerms = menuPermService.listByMenuId(menuId);
+			if (CollectionUtils.isNotEmpty(oldMenuPerms)) {
+				List<Long> invalidOldPermIds = new ArrayList<>();
+				List<Long> existsPermIds = new ArrayList<>();
+				if (CollectionUtils.isNotEmpty(oldMenuPerms)) {
+					for(SysMenuPerm menuPerm : oldMenuPerms) {
+						if (!permIds.contains(menuPerm.getPermId())) {
+							invalidOldPermIds.add(menuPerm.getPermId());
+						} else {
+							existsPermIds.add(menuPerm.getPermId());
+						}
+					}
+				}
+				
+				//remove invalid role-menu, menu-perm
+				if (!invalidOldPermIds.isEmpty()) {
+					menuPermService.remove(menuPermService.lambdaQuery().eq(SysMenuPerm::getMenuId, menuId).in(SysMenuPerm::getPermId, invalidOldPermIds));
+					List<SysRolePerm> rolePerms = rolePermService.list(rolePermService.lambdaQuery().in(SysRolePerm::getPermId, invalidOldPermIds));
+					if (!rolePerms.isEmpty()) {
+						List<Long> oldRoleIds = rolePerms.stream().map(f -> f.getRoleId()).collect(Collectors.toList());
+						roleMenuService.remove(roleMenuService.lambdaQuery().eq(SysRoleMenu::getMenuId, menuId).in(SysRoleMenu::getRoleId, oldRoleIds));
+					}
+					
+				}
+				//create new menu-perm
+				for (Long permId : permIds) {
+					if (!existsPermIds.contains(permId)) {
+						SysMenuPerm menuPerm = new SysMenuPerm();
+						menuPerm.setMenuId(menuId);
+						menuPerm.setPermId(permId);
+						menuPermService.save(menuPerm);
+					}
+				}
+			} 
+
+			//re valid relation between role and menu
+			List<SysRolePerm> rolePerms = rolePermService.list(rolePermService.lambdaQuery().in(SysRolePerm::getPermId, permIds));
+			for (SysRolePerm rolePerm : rolePerms) {
+				if (isEligibleRoleAndMenu(rolePerm.getRoleId(), menuId)) {
+					SysRoleMenu roleMenu = new SysRoleMenu();
+					roleMenu.setRoleId(rolePerm.getRoleId());
+					roleMenu.setMenuId(menuId);
+					roleMenuService.save(roleMenu);
+				}
+			}
+		} else {
+			roleMenuService.remove(roleMenuService.lambdaQuery().eq(SysRoleMenu::getMenuId, menuId));
+			menuPermService.remove(menuPermService.lambdaQuery().eq(SysMenuPerm::getMenuId, menuId));
+		}
+		
 		
 	}
 	
@@ -151,9 +206,11 @@ public class SysPermService extends ServiceImpl<SysPermMapper, SysPerm> {
 					
 					if (null != menuIds) {
 						for (Long menuId : menuIds) {
-							//TODO
-							if (menuPermService.count(menuPermService.lambdaQuery().eq(SysMenuPerm::getMenuId, menuId)) == 1) {
-								
+							if (isEligibleRoleAndMenu(roleId, menuId)) {
+								SysRoleMenu roleMenu = new SysRoleMenu();
+								roleMenu.setRoleId(roleId);
+								roleMenu.setMenuId(menuId);
+								roleMenuService.save(roleMenu);
 							}
 						}
 					}
@@ -164,12 +221,15 @@ public class SysPermService extends ServiceImpl<SysPermMapper, SysPerm> {
 			rolePermService.remove(rolePermService.lambdaQuery().eq(SysRolePerm::getPermId, permId));
 		}
 	}
-	//TODO 
+ 
 	public boolean isEligibleRoleAndMenu(Long roleId, Long menuId) {
 		List<SysMenuPerm> menuPerms = menuPermService.list(menuPermService.lambdaQuery().eq(SysMenuPerm::getMenuId, menuId));
 		if (CollectionUtils.isNotEmpty(menuPerms)) {
-			//rolePermService.list(rolePermService.lambdaQuery().)
-			return true;
+			int count = rolePermService.count(rolePermService.lambdaQuery().eq(SysRolePerm::getRoleId, roleId).in(SysRolePerm::getPermId, menuPerms.stream().map(f -> f.getPermId()).collect(Collectors.toList())));
+			if (count == menuPerms.size())
+				return true;
+			else
+				return false;
 		} else {
 			return false;
 		}
