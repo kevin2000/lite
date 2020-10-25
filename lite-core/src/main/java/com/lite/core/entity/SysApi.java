@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysPerm implements Serializable {
+public class SysApi implements Serializable {
 
     private static final long serialVersionUID=1L;
     @TableId(type = IdType.AUTO)

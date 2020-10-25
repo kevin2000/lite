@@ -2,6 +2,7 @@ package com.lite.core.controller;
 
 import com.lite.core.annotation.Log;
 import com.lite.core.entity.SysMenu;
+import com.lite.core.service.SysApiService;
 import com.lite.core.service.SysMenuService;
 import com.lite.core.utils.ResponseData;
 import com.lite.core.utils.tree.Tree;
@@ -20,6 +21,8 @@ public class MenuController {
 	String prefix = "core/sys/menu";
 	@Autowired
 	SysMenuService menuService;
+	@Autowired
+	SysApiService apiService;
 
 	@GetMapping()
 	String menu(Model model) {
@@ -106,5 +109,12 @@ public class MenuController {
 	Tree<SysMenu> tree(@PathVariable("roleId") Long roleId) {
 		Tree<SysMenu> tree = menuService.getTree(roleId);
 		return tree;
+	}
+
+	@PostMapping("/associateMenuAndApi")
+	@ResponseBody	
+	ResponseData<String> associateMenuAndApi(@RequestParam("menuId") Long menuId, @RequestParam("apiIds")List<Long> apiIds){
+		apiService.associateMenuAndApi(menuId, apiIds);
+		return ResponseData.getSuccess();
 	}
 }

@@ -1,7 +1,7 @@
 package com.lite.core.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lite.core.entity.SysPerm;
+import com.lite.core.entity.SysRoleApi;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.lite.core.entity.SysPerm;
  * @author joe
  * @since 2020-10-05
  */
-public interface SysPermMapper extends BaseMapper<SysPerm> {
+public interface SysRoleApiMapper extends BaseMapper<SysRoleApi> {
 
 }

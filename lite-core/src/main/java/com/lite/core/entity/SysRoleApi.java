@@ -14,15 +14,15 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SysMenuPerm implements Serializable {
+public class SysRoleApi implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     private Long id;
 
-    private Long menuId;
+    private Long roleId;
 
-    private Long permId;
+    private Long apiId;
 
 
 }

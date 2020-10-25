@@ -1,7 +1,7 @@
 package com.lite.core.service;
 
-import com.lite.core.entity.SysRolePerm;
-import com.lite.core.mapper.SysRolePermMapper;
+import com.lite.core.entity.SysRoleApi;
+import com.lite.core.mapper.SysRoleApiMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
  * @since 2020-10-05
  */
 @Service
-public class SysRolePermService extends ServiceImpl<SysRolePermMapper, SysRolePerm> {
-	public List<SysRolePerm> listByPermId(Long permId){
-		return list(new QueryWrapper<SysRolePerm>().lambda().eq(SysRolePerm::getPermId, permId));
+public class SysRoleApiService extends ServiceImpl<SysRoleApiMapper, SysRoleApi> {
+	public List<SysRoleApi> listByapiId(Long apiId){
+		return list(new QueryWrapper<SysRoleApi>().lambda().eq(SysRoleApi::getApiId, apiId));
 	}
 }

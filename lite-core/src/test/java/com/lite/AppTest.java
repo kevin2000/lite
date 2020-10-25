@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lite.core.entity.SysUser;
 import com.lite.core.mapper.SysUserMapper;
-import com.lite.core.service.SysPermService;
+import com.lite.core.service.SysApiService;
 import com.lite.core.service.SysUserService;
 import com.lite.core.utils.StringUtils;
 
@@ -32,7 +32,7 @@ public class AppTest {
 	@Autowired
 	SysUserMapper userMapper;
 	@Autowired
-	SysPermService perService;
+	SysApiService perService;
 	@Test
 	public void test() {
 		perService.initAllPerms();

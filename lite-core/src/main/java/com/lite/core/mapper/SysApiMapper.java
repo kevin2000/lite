@@ -1,7 +1,7 @@
 package com.lite.core.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lite.core.entity.SysMenuPerm;
+import com.lite.core.entity.SysApi;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.lite.core.entity.SysMenuPerm;
  * @author joe
  * @since 2020-10-05
  */
-public interface SysMenuPermMapper extends BaseMapper<SysMenuPerm> {
+public interface SysApiMapper extends BaseMapper<SysApi> {
 
 }

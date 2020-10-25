@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lite.core.dto.PermVo;
-import com.lite.core.entity.SysPerm;
+import com.lite.core.entity.SysApi;
 
 public class PermissionUtil {
 
@@ -36,11 +36,11 @@ public class PermissionUtil {
 	 * @param permissions
 	 * @return
 	 */
-    public static List<PermVo> listPermVo(List<SysPerm> permissions) {
+    public static List<PermVo> listPermVo(List<SysApi> permissions) {
         List<PermVo> root = new ArrayList<>();
         Map<String, PermVo> mapApiToPerm = new HashMap<>();
         PermVo perm = null;
-        for (SysPerm permission : permissions) {
+        for (SysApi permission : permissions) {
             String api = permission.getUrl();
             String pre = null;
             int lastIndex = api.lastIndexOf("/");
@@ -123,9 +123,9 @@ public class PermissionUtil {
         return root;
     }
 
-    public static List<SysPerm> listPermission(ApplicationContext context, String basicPackage) {
+    public static List<SysApi> listPermission(ApplicationContext context, String basicPackage) {
         Map<String, Object> map = context.getBeansWithAnnotation(Controller.class);
-        List<SysPerm> permissions = new ArrayList<>();
+        List<SysApi> permissions = new ArrayList<>();
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             Object bean = entry.getValue();
             if (!StringUtils.contains(ClassUtils.getPackageName(bean.getClass()), basicPackage)) {
@@ -142,7 +142,7 @@ public class PermissionUtil {
             for (Method method : methods) {
                 RequestMapping mapping = AnnotationUtils.getAnnotation(method, RequestMapping.class);
                 if (mapping != null) {
-                	SysPerm permission = new SysPerm();
+                	SysApi permission = new SysApi();
                 	
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
@@ -161,7 +161,7 @@ public class PermissionUtil {
             for (Method method : methods) {
             	PostMapping mapping = AnnotationUtils.getAnnotation(method, PostMapping.class);
                 if (mapping != null) {
-                	SysPerm permission = new SysPerm();
+                	SysApi permission = new SysApi();
                 	
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
@@ -177,7 +177,7 @@ public class PermissionUtil {
             for (Method method : methods) {
             	GetMapping mapping = AnnotationUtils.getAnnotation(method, GetMapping.class);
                 if (mapping != null) {
-                	SysPerm permission = new SysPerm();
+                	SysApi permission = new SysApi();
                 	
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
@@ -193,7 +193,7 @@ public class PermissionUtil {
             for (Method method : methods) {
             	PutMapping mapping = AnnotationUtils.getAnnotation(method, PutMapping.class);
                 if (mapping != null) {
-                	SysPerm permission = new SysPerm();
+                	SysApi permission = new SysApi();
                 	
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
@@ -209,7 +209,7 @@ public class PermissionUtil {
             for (Method method : methods) {
             	DeleteMapping mapping = AnnotationUtils.getAnnotation(method, DeleteMapping.class);
                 if (mapping != null) {
-                	SysPerm permission = new SysPerm();
+                	SysApi permission = new SysApi();
                 	
                 	if (mapping.value().length > 0)
                 		permission.setUrl(classUrl + mapping.value()[0]);
@@ -224,9 +224,9 @@ public class PermissionUtil {
         return permissions;
     }
     
-    public static Set<String> listPermissionString(List<SysPerm> permissions) {
+    public static Set<String> listPermissionString(List<SysApi> permissions) {
         Set<String> permissionsString = new HashSet<>();
-        for (SysPerm permission : permissions) {
+        for (SysApi permission : permissions) {
             permissionsString.add(permission.getUrl());
         }
         return permissionsString;
