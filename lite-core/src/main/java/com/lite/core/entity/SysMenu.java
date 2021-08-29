@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author joe
- * @since 2020-09-04
+ * @since 2020-11-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -62,12 +62,12 @@ public class SysMenu implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime gmtCreate;
+    private LocalDateTime createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime gmtModified;
+    private LocalDateTime modifyTime;
 
 
 }

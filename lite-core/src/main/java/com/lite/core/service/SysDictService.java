@@ -44,7 +44,7 @@ public class SysDictService extends ServiceImpl<SysDictMapper, SysDict> {
                     if (!Objects.equals(userHobby, hobby.getId().toString())) {
                         continue;
                     }
-                    hobby.setRemarks("true");
+                    hobby.setRemark("true");
                     break;
                 }
             }

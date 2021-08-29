@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Params</title>
+<head th:include="include :: header">
+</head>
+
+<body>
+	<!-- <div th:if="${null == param.hideNav}">
+		<div lang="en" th:replace="core/fragments/navHeader :: navHeader(navTab='Maintenance')"> </div>
+		<div class="page-header ezTitle">Params</div>
+	</div> -->
+
+	<div class="well well-sm">
+		<form method="POST" id="formList" name="formList" onsubmit="return false">
+			<input type="hidden" id="dicCode" name="dicCode" th:value="${param.dicCode}" class="condition">
+			<input type="hidden" id="multiple" name="multiple" th:value="${param.multiple}" class="condition">
+			<div class="input-group">
+			    <input type="text" class="form-control condition" name="searchValue" id="searchValue">
+			    <div class="input-group-btn">
+			      <button id="btnSearch" class="btn btn-default" type="button" onclick="search()">
+			        <i class="glyphicon glyphicon-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form>
+
+	</div>
+
+	<div class="ezDetails">
+		<div class="toolbar pull-left">
+			<button id="deselectAll" type="button" class="btn  btn-danger btn-sm" onclick="deselectAll()">
+				<i class="fa fa-plus" aria-hidden="true"></i>Deselect
+			</button>
+		</div>
+		<table id="DataTable" data-mobile-responsive="true">
+		</table>
+	</div>
+
+	<div th:include="include::footer"></div>
+	<script th:src="@{/js/core/dic/dicOptionSelector.js}"></script>
+</body>
+</html>

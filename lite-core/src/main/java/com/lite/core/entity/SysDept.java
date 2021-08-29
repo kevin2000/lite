@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author joe
- * @since 2020-09-04
+ * @since 2020-11-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -36,7 +36,7 @@ public class SysDept implements Serializable {
     /**
      * 排序
      */
-    private Integer orderNum;
+    private Integer sn;
 
     /**
      * 是否删除  -1：已删除  0：正常

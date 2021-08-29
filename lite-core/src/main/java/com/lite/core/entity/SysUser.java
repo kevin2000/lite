@@ -1,7 +1,6 @@
 package com.lite.core.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
@@ -14,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author joe
- * @since 2020-09-04
+ * @since 2020-11-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +36,6 @@ public class SysUser implements Serializable {
      */
     private String password;
 
-    @TableField(value = "dept_id")
     private Long deptId;
 
     /**
@@ -58,17 +56,17 @@ public class SysUser implements Serializable {
     /**
      * 创建用户id
      */
-    private Long userIdCreate;
+    private Long creator;
 
     /**
      * 创建时间
      */
-    private LocalDateTime gmtCreate;
+    private LocalDateTime createTime;
 
     /**
      * 修改时间
      */
-    private LocalDateTime gmtModified;
+    private LocalDateTime modifyTime;
 
     /**
      * 性别

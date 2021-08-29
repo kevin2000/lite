@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>登录</title>
+<link th:href="@{/css/core/login.css}" rel="stylesheet" />
+<meta name="renderer" content="webkit">
+</head>
+<body class="signin">
+	<div class="main">
+		<div class="container a-container is-txl" id="a-container">
+			<form class="form" id="formRegister" >
+				<h2 class="form_title title">注册</h2>
+				<!-- <div class="form__icons">
+					<img class="form__icon" src="./CodePen - Neumorphism Login Form_files/1.svg" alt=""><img class="form__icon" src="./CodePen - Neumorphism Login Form_files/2.svg">
+				</div> -->
+				<span class="form__span">or use email for registration</span> 
+					<input class="form__input" type="text" placeholder="Name" required="required"> 
+					<input class="form__input" type="text" placeholder="Email" required="required">
+					<input class="form__input" type="password" placeholder="Password" required="required">
+				<button class="form__button button submit">注册</button>
+			</form>
+		</div>
+		<div class="container b-container is-txl is-z200" id="b-container">
+			<form class="form" id="formLogin" >
+				<h2 class="form_title title">登录</h2>
+				<!-- <div class="form__icons">
+					<img class="form__icon" src="./CodePen - Neumorphism Login Form_files/3.svg">
+				</div> -->
+				<span class="form__span">or use your email account</span>
+					<input class="form__input" type="text" name="username" placeholder="Username" required="required"> 
+					<input class="form__input" type="password" name="password" placeholder="Password" required="required">
+					<a class="form__link">忘记密码?</a>
+				<button class="form__button button submit" >登录</button>
+			</form>
+		</div>
+		<div class="switch is-txr" id="switch-cnt">
+			<div class="switch__circle is-txr"></div>
+			<div class="switch__circle switch__circle--t is-txr"></div>
+			<div class="switch__container is-hidden" id="switch-c1">
+				<h2 class="switch__title title">Welcome Back !</h2>
+				<p class="switch__description description">To keep connected with us please login with your personal info</p>
+				<button class="switch__button button switch-btn" >登录</button>
+			</div>
+			<div class="switch__container" id="switch-c2">
+				<h2 class="switch__title title">Hello Friend !</h2>
+				<p class="switch__description description">Enter your personal details and start journey with us</p>
+				<button class="switch__button button switch-btn">注册</button>
+			</div>
+		</div>
+	</div>
+	<script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; var backUrl=[[${param.backUrl}]];</script>
+	<script th:src="@{/lib/jquery-2.1.4/jquery.min.js}"></script>
+	<script th:src="@{/lib/jquery-form-4.2.1/jquery.form.min.js}"></script>
+	<script th:src="@{/lib/jquery-validate-1.17/jquery.validate.min.js}"></script>
+	<script th:src="@{/lib/layer-3.1.1/layer.js}"></script>
+	<script th:src="@{/js/core/core.js}"></script>
+	<script th:src="@{/js/core/login.js}"></script>
+</body>
+</html>

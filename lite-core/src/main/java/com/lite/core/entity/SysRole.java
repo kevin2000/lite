@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author joe
- * @since 2020-09-04
+ * @since 2020-11-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -42,17 +42,17 @@ public class SysRole implements Serializable {
     /**
      * 创建用户id
      */
-    private Long userIdCreate;
+    private Long creator;
 
     /**
      * 创建时间
      */
-    private LocalDateTime gmtCreate;
+    private LocalDateTime createTime;
 
     /**
      * 创建时间
      */
-    private LocalDateTime gmtModified;
+    private LocalDateTime modifyTime;
 
 
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<title>Dic</title>
+<head th:include="include :: header">
+</head>
+
+<body>
+	<div lang="en" th:replace="core/fragments/navHeader :: navHeader(navTab='Maintenance')"> </div>
+		<div class="page-header ezTitle">Dic</div>
+
+	<div class="well well-sm">
+		<form method="POST" id="formList" name="formList">
+			<div class="form-inline">
+				<label>Code</label>
+				<input id="code" name="code" type="text" class="form-control condition" th:value="${param.code}">
+				<label>Table</label>
+				<input id="table" name="table" type="text" class="form-control condition" th:value="${param.code}">
+				<label>Status</label>
+				<select id="status" name="status" class="condition selectpicker">
+					<option value="">All</option>
+					<option value="enabled">enabled</option>
+					<option value="paused">paused</option>
+				</select>
+				
+			</div>
+		</form>
+		<table class="ezTableMid">
+			<tr>
+				<td>
+					<button type="button" class="btn btn-primary btn-sm" onclick="reLoadDataTable()">Search</button>&nbsp;&nbsp;
+					<button type="button" class="btn btn-primary btn-sm" onclick="reset()">Reset</button>&nbsp;&nbsp;
+				</td>
+				<td><span id="spanSuccess" class='label label-success ezLabelMsg ezMarginRight'></span> <span th:if="${warning}" th:text="${warning}" class='label label-warning ezLabelMsg ezMarginRight'></span>
+					<span id="spanError" class='label label-danger ezLabelMsg ezMarginRight'></span> <a th:if="${permalink}" th:href="${permalink}" target="_blank">Permalink</a></td>
+				<td><span th:if="${export}" th:remove="tag" th:utext="${export}" /></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<div class="ezDetails">
+		<div class="toolbar pull-left">
+			<button class="btn  btn-primary btn-sm" onclick="add()"><i class="fa fa-plus" aria-hidden="true"></i>Create Dic</button>
+		</div>
+		<table id="DataTable" data-mobile-responsive="true">
+		</table>
+	</div>
+
+	<div th:include="include::footer"></div>
+	<script th:src="@{/js/core/dic/dic.js}"></script>
+</body>
+</html>

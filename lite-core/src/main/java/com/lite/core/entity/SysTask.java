@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author joe
- * @since 2020-09-04
+ * @since 2020-11-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -47,7 +47,7 @@ public class SysTask implements Serializable {
     /**
      * 更新者
      */
-    private String updateBy;
+    private String modifier;
 
     /**
      * 任务执行时调用哪个类的方法 包名+类名
@@ -57,7 +57,7 @@ public class SysTask implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createDate;
+    private LocalDateTime createTime;
 
     /**
      * 任务状态
@@ -72,12 +72,12 @@ public class SysTask implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateDate;
+    private LocalDateTime mofifyTime;
 
     /**
      * 创建者
      */
-    private String createBy;
+    private String creator;
 
     /**
      * Spring bean
