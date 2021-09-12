@@ -33,7 +33,7 @@ public class AutoGenerator {
 		
 		if (null != generateHandlerChain ) {
 			if (null != basePackages) {
-				for (String basePackage : basePackages) { // 包下面的类
+				for (String basePackage : basePackages) {
 					Set<Class<?>> clazzs = ClassUtil.getClasses(basePackage);
 					if (clazzs == null) {
 						return;

@@ -1,96 +1,112 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <title>Advertise Group Edit</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<title>Advertise Group Edit</title>
 <head th:include="include :: header">
 </head>
 
 <body>
 	<div class="ibox float-e-margins">
-		<div class="ibox-title"><br></div>
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="formEdit">
-							<div class="form-group">
-								<input type="hidden" id="editType" name="editType" th:value="${editType}">
-								<label class="col-sm-3 control-label">Code</label>
-								<div class="col-sm-8">
-									<input id="code" name="code" th:value="${model.code}" type="text" class="form-control" th:readonly="@{null != ${model.code}}">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Type</label>
-								<div class="col-sm-8">
-									<label class="radio-inline">
-								        <input type="radio" name="type"  value="table" th:field="${model.type}" checked="checked"> Table
-								    </label>
-								    <label class="radio-inline">
-								        <input type="radio" name="type"  value="option" th:field="${model.type}"> Option
-								    </label>
-								</div>
-							</div>
-	
-	
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Table Name</label>
-								<div class="col-sm-8">
-									<input id="table" name="table" th:value="${model.table}" type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Code Field</label>
-								<div class="col-sm-8">
-									<input id="codeField" name="codeField" th:value="${model.codeField}" type="text" class="form-control">
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Name Field</label>
-								<div class="col-sm-8">
-									<input id="nameField" name="nameField" th:value="${model.nameField}" type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Filter</label>
-								<div class="col-sm-8">
-									<input id="filter" name="filter" th:value="${model.filter}" type="text" class="form-control" placeholder='{sellerId:"DS",status:"listed"}'>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Sort</label>
-								<div class="col-sm-8">
-									<input id="sort" name="sort" th:value="${model.sort}" type="text" class="form-control" placeholder="productId asc, updateTime desc">
-								</div>
-							</div>
-							
-							
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Status</label>
-								<div class="col-sm-8">
-									 <label class="radio-inline">
-								        <input type="radio" name="status"  value="enabled" th:field="${model.status}" checked="checked"> enabled
-								    </label>
-								    <label class="radio-inline">
-								        <input type="radio" name="status"  value="paused" th:field="${model.status}"> paused
-								    </label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">Remark</label>
-								<div class="col-sm-8">
-									 <textarea id="remark" name="remark" th:text="${model.remark}" class="form-control"></textarea>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary btn-sm" onclick="reutrn false">Submit</button>&nbsp;
-									<button type="button" class="btn btn-info btn-sm" onclick="cancel()">Cancel</button>
-								</div>
-							</div>
-							
-						</form>
+		<div class="ibox-title">
+			<br>
+		</div>
+		<div class="ibox-content">
+			<form class="form-horizontal m-t" id="formEdit">
+				<div class="form-group">
+					<input type="hidden" id="editType" name="editType"
+						th:value="${editType}"> <label
+						class="col-sm-3 control-label">Code</label>
+					<div class="col-sm-8">
+						<input id="code" name="code" th:value="${model.code}" type="text"
+							class="form-control" th:readonly="@{null != ${model.code}}">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Type</label>
+					<div class="col-sm-8">
+						<label class="radio-inline"> <input type="radio"
+							name="type" value="table" th:field="${model.type}"
+							checked="checked"> Table
+						</label> <label class="radio-inline"> <input type="radio"
+							name="type" value="option" th:field="${model.type}">
+							Option
+						</label>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Table Name</label>
+					<div class="col-sm-8">
+						<input id="table" name="table" th:value="${model.table}"
+							type="text" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Code Field</label>
+					<div class="col-sm-8">
+						<input id="codeField" name="codeField"
+							th:value="${model.codeField}" type="text" class="form-control">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Name Field</label>
+					<div class="col-sm-8">
+						<input id="nameField" name="nameField"
+							th:value="${model.nameField}" type="text" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Filter</label>
+					<div class="col-sm-8">
+						<input id="filter" name="filter" th:value="${model.filter}"
+							type="text" class="form-control"
+							placeholder='{sellerId:"DS",status:"listed"}'>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Sort</label>
+					<div class="col-sm-8">
+						<input id="sort" name="sort" th:value="${model.sort}" type="text"
+							class="form-control" placeholder="productId asc, updateTime desc">
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Status</label>
+					<div class="col-sm-8">
+						<label class="radio-inline"> <input type="radio"
+							name="status" value="enabled" th:field="${model.status}"
+							checked="checked"> enabled
+						</label> <label class="radio-inline"> <input type="radio"
+							name="status" value="paused" th:field="${model.status}">
+							paused
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Remark</label>
+					<div class="col-sm-8">
+						<textarea id="remark" name="remark" th:text="${model.remark}"
+							class="form-control"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-3">
+						<button type="submit" class="btn btn-primary btn-sm"
+							onclick="reutrn false">Submit</button>
+						&nbsp;
+						<button type="button" class="btn btn-info btn-sm"
+							onclick="cancel()">Cancel</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
 	<div th:include="include::footer"></div>
 	<script th:src="@{/js/core/dic/dicForm.js}"></script>
 </body>

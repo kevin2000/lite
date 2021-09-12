@@ -82,7 +82,6 @@
 			<artifactId>hutool-core</artifactId>
 			<version>5.4.4</version>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>
