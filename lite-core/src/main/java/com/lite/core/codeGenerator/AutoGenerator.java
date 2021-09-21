@@ -1,12 +1,6 @@
 package com.lite.core.codeGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
-
-import com.lite.core.codeGenerator.tpl.html.EditHtmlHandler;
-import com.lite.core.codeGenerator.tpl.html.ListHtmlHandler;
 
 import lombok.Data;
 
@@ -17,7 +11,7 @@ public class AutoGenerator {
 	private GenerateHandlerChain generateHandlerChain;
 	
 	public AutoGenerator() {
-		generateHandlerChain = new GenerateHandlerChain().add(new EditHtmlHandler()).add(new ListHtmlHandler());
+		//generateHandlerChain = new GenerateHandlerChain().add(new EditHtmlHandler()).add(new ListHtmlHandler());
 	}
 	
 	public void setGenerateHandlerChain(GenerateHandlerChain generateHandlerChain) {

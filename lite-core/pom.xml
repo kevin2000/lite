@@ -76,12 +76,13 @@
 			<scope>test</scope>
 		</dependency>
 				
-		<!-- https://mvnrepository.com/artifact/cn.hutool/hutool-core -->
+		<!-- https://mvnrepository.com/artifact/com.jfinal/enjoy -->
 		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-core</artifactId>
-			<version>5.4.4</version>
+		    <groupId>com.jfinal</groupId>
+		    <artifactId>enjoy</artifactId>
+		    <version>4.9.16</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
